@@ -1,0 +1,8 @@
+#summary Disruptor Class Diagram
+#labels classes,article-sc
+
+The core relationships in the Disruptor framework are depicted in the class diagram below.  This diagram leaves out the convenience classes which can be used to simplify the programming model.  After the dependency graph is constructed the programming model is simple.  `Producers` claim entries in sequence via a `ProducerBarrier`, write their changes into the claimed entry, then commit that entry back via the `ProducerBarrier` making them available for consumption.  As a consumer all one needs do is provide a `BatchHandler` implementation that receives call backs when a new entry is available.  This resulting programming model is event based having a lot of similarities to the Actor Model.
+
+http://disruptor.googlecode.com/svn/wiki/images/disruptor-class-diagram.png
+
+Separating the concerns normally conflated in queue implementations allows for a more flexible design.  A `RingBuffer` exists at the core of the Disruptor pattern providing storage for data exchange without contention.  The concurrency concerns are separated out for the producers and consumers interacting with the `RingBuffer`.  The `ProducerBarrier` manages any concurrency concerns associated with claiming slots in the ring buffer while tracking dependant consumers to prevent the ring from wrapping.  The `ConsumerBarrier` notifies consumers when new entries are available and `Consumers` can be constructed into a graph of dependencies representing multiple stages in a processing pipeline.
