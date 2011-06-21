@@ -1,4 +1,5 @@
 #summary An example of a single producer and single consumer
+#labels code,article-sc
 
 = Code Example =
 
