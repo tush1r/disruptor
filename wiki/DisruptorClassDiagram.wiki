@@ -1,5 +1,7 @@
-#summary Disruptor Class Diagram
+#summary Showing the main classes that make up the Disruptor framework
 #labels classes,article-sc
+
+== Disruptor Class Diagram ==
 
 The core relationships in the Disruptor framework are depicted in the class diagram below.  This diagram leaves out the convenience classes which can be used to simplify the programming model.  After the dependency graph is constructed the programming model is simple.  `Producers` claim entries in sequence via a `ProducerBarrier`, write their changes into the claimed entry, then commit that entry back via the `ProducerBarrier` making them available for consumption.  As a consumer all one needs do is provide a `BatchHandler` implementation that receives call backs when a new entry is available.  This resulting programming model is event based having a lot of similarities to the Actor Model.
 
