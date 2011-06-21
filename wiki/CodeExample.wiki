@@ -38,7 +38,9 @@ ProducerBarrier<ValueEntry> producerBarrier = ringBuffer.createProducerBarrier(b
 
 // Each consumer can run on a separate thread
 EXECUTOR.submit(batchConsumer);
+}}}
 
+{{{
 // Producers claim entries in sequence
 ValueEntry entry = producerBarrier.nextEntry();
 
