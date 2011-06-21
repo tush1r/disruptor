@@ -1,0 +1,10 @@
+#summary Events and presentations around the Disruptor
+#labels events
+
+= Upcoming Events =
+
+22nd June, 4pm - [http://vip.informatica.com/MartinThompson47242?elqPURLPage=9031 Ultra High Performance Risk Management: Informatica Webinar] Featuring Martin Thompson
+
+11th October - [http://gotocon.com/aarhus-2011/tracks/show_track.jsp?trackOID=462 Goto Aarhus]. Martin Thompson and Dave Farley will be presenting the LMAX Disruptor pattern: "100K transactions per second at less than 1ms latency".
+
+13th - 14th October - [http://gotocon.com/amsterdam-2011/ Goto Amsterdam]. Martin Thompson and Dave Farley will be tackling the folklore surrounding high performance computing.
