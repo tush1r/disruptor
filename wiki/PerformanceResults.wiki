@@ -25,7 +25,7 @@ As a reference we choose Doug Lea’s excellent [http://download.oracle.com/java
 
 === Nehalem 2.8Ghz – Windows 7 SP1 64-bit ===
 Comparative throughput (in ops per sec)
-|| || *ABQ* || *Disruptor* ||
+|| || *Array Blocking Queue* || *Disruptor* ||
 || Unicast: 1P – 1C || 5,339,256 || 25,998,336 ||
 || Pipeline: 1P – 3C || 2,128,918 || 16,806,157 || 
 || Sequencer: 3P – 1C || 5,539,531 || 13,403,268 || 
@@ -35,7 +35,7 @@ Comparative throughput (in ops per sec)
 <br/>
 === Sandy Bridge 2.2Ghz – Linux 2.6.38 64-bit ===
 Comparative throughput (in ops per sec)
-|| || *ABQ* || *Disruptor* || 
+|| || *Array Blocking Queue* || *Disruptor* || 
 || Unicast: 1P – 1C || 4,057,453 || 22,381,378 || 
 || Pipeline: 1P – 3C || 2,006,903 || 15,857,913 || 
 || Sequencer: 3P – 1C || 2,056,118 || 14,540,519 || 
@@ -53,10 +53,10 @@ The results below are for 2.2Ghz Core i7-2720QM running Java 1.6.0_25 64-bit on 
 
 
 
-|| || Array Blocking Queue (ns) || Disruptor (ns) || 
+|| || *Array Blocking Queue (ns)* || *Disruptor (ns)* || 
 || Mean Latency || 32,757 || 52 || 
 || 99% observations less than || 2,097,152 || 128 || 
 || 99.99% observations less than || 4,194,304 || 8,192 || 
 
 
-Mean latency per hop for the Disruptor comes out at 52 nanoseconds compared to 32,757 nanoseconds for ArrayBlockingQueue.  Profiling shows the use of locks and signalling via a condition variable are the main cause of latency for the ArrayBlockingQueue. 
+Mean latency per hop for the Disruptor comes out at 52 nanoseconds compared to 32,757 nanoseconds for `ArrayBlockingQueue`.  Profiling shows the use of locks and signalling via a condition variable are the main cause of latency for the `ArrayBlockingQueue`. 
