@@ -5,6 +5,7 @@
 
 The code below is an example of a single producer and single consumer using the convenience interface `BatchHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
 
+Consumers implement this interface for convenience.
 {{{
 // Callback handler which can be implemented by consumers
 final BatchHandler<ValueEntry> batchHandler = new BatchHandler<ValueEntry>()
@@ -26,6 +27,7 @@ final BatchHandler<ValueEntry> batchHandler = new BatchHandler<ValueEntry>()
 };
 }}}
 
+Setup the !RingBuffer and barriers.
 {{{
 RingBuffer<ValueEntry> ringBuffer =
     new RingBuffer<ValueEntry>(ValueEntry.ENTRY_FACTORY, SIZE,
@@ -40,6 +42,7 @@ ProducerBarrier<ValueEntry> producerBarrier = ringBuffer.createProducerBarrier(b
 EXECUTOR.submit(batchConsumer);
 }}}
 
+Producer claims entries for exchange with the consumers.
 {{{
 // Producers claim entries in sequence
 ValueEntry entry = producerBarrier.nextEntry();
