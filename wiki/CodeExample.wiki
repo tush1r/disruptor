@@ -33,9 +33,9 @@ RingBuffer<ValueEntry> ringBuffer =
     new RingBuffer<ValueEntry>(ValueEntry.ENTRY_FACTORY, SIZE,
                                ClaimStrategy.Option.SINGLE_THREADED,
                                WaitStrategy.Option.YIELDING);
+
 ConsumerBarrier<ValueEntry> consumerBarrier = ringBuffer.createConsumerBarrier();       
-BatchConsumer<ValueEntry> batchConsumer = 
-    new BatchConsumer<ValueEntry>(consumerBarrier, batchHandler);
+BatchConsumer<ValueEntry> batchConsumer = new BatchConsumer<ValueEntry>(consumerBarrier, batchHandler);
 ProducerBarrier<ValueEntry> producerBarrier = ringBuffer.createProducerBarrier(batchConsumer);   
 
 // Each consumer can run on a separate thread
