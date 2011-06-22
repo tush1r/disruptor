@@ -60,4 +60,4 @@ The results below are for 2.2Ghz Core i7-2720QM running Java 1.6.0_25 64-bit on 
 
 Mean latency per hop for the Disruptor comes out at 52 nanoseconds compared to 32,757 nanoseconds for `ArrayBlockingQueue`.  Profiling shows the use of locks and signalling via a condition variable are the main cause of latency for the `ArrayBlockingQueue`. 
 
-*Note:* It is worth playing with JVM configuration in conjunction with different settings for Hyper Threading, C States, SMI Interrupts and binding the JVM threads to specific core groups away from system interrupts.  These changes can make significant changes to latency results.
+*Note:* It is worth playing with JVM configuration in conjunction with different settings for Hyper Threading, C States, SMI Interrupts and binding the JVM threads to specific core groups away from system interrupts.  These changes can make a significant difference to latency results.
