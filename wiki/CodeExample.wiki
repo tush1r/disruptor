@@ -30,7 +30,7 @@ final BatchHandler<ValueEntry> batchHandler = new BatchHandler<ValueEntry>()
 Setup the !RingBuffer and barriers.
 {{{
 RingBuffer<ValueEntry> ringBuffer =
-    new RingBuffer<ValueEntry>(ValueEntry.ENTRY_FACTORY, SIZE,
+    new RingBuffer<ValueEntry>(ValueEntry.ENTRY_FACTORY, RING_SIZE,
                                ClaimStrategy.Option.SINGLE_THREADED,
                                WaitStrategy.Option.YIELDING);
 
