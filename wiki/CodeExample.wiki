@@ -5,7 +5,7 @@
 
 The code below is an example of a single producer and single consumer using the convenience interface `BatchHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
 
-RingBuffer entry for exchange.
+!RingBuffer entry as the item of data exchange.
 {{{
 public final class ValueEntry extends AbstractEntry
 {
