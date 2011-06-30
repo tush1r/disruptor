@@ -1,0 +1,10 @@
+#summary Log of changes between versions.
+
+==Changes==
+
+===1.0.7===
+ * Factored out !LifecycleAware interface to allowing consumers handlers to be notified when their thread starts and shuts down.
+
+===1.0.6===
+ * Cache minimum consumer sequence in producer barriers.  This helps make the performance more predictable on Nehalem processors and greater on earlier Core 2 processors.
+
