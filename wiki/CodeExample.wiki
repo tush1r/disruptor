@@ -45,11 +45,6 @@ final BatchHandler<ValueEntry> batchHandler = new BatchHandler<ValueEntry>()
     {
         // useful for flushing results to an IO device if necessary.
     }
-
-    public void onCompletion()
-    {
-        // do any necessary clean up before shutdown
-    }
 };
 }}}
 
