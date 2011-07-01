@@ -3,7 +3,7 @@
 ==Changes==
 
 ===1.0.8===
- * Bugfix for BatchConsumer sequence update when using SequenceTrackingHandler to ensure sequence is always updated at the end of a batch regardless.
+ * Bugfix for !BatchConsumer sequence update when using !SequenceTrackingHandler to ensure sequence is always updated at the end of a batch regardless.
 
 ===1.0.7===
  * Factored out !LifecycleAware interface to allowing consumers handlers to be notified when their thread starts and shuts down.
