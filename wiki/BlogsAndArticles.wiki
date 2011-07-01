@@ -1,0 +1,9 @@
+#summary Links to blog posts and articles covering the Disruptor
+
+= How the Disruptor works =
+
+[http://mechanitis.blogspot.com/2011/06/dissecting-disruptor-whats-so-special.html What's so special about a ring buffer?] - A summary by Trisha of the data structure at the heart of the Disruptor patter, how it's implemented and what's so great about it.
+
+[http://mechanitis.blogspot.com/2011/06/dissecting-disruptor-how-do-i-read-from.html How do I read from a ring buffer?] - Trisha gives an overview of the `Consumer` and `ConsumerBarrier`, which allows you to read stuff off the ring buffer.
+
+[http://blog.codeaholics.org/2011/the-disruptor-lock-free-publishing/ Lock-free publishing] - Danny outlines the concepts behind putting items into the ring buffer.
