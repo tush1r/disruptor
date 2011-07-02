@@ -10,4 +10,4 @@ Yes all entries exchanged in a strict FIFO manner based on the claim sequence.
 
 ===Q2. Do you relax the consistency model to gain performance?===
 
-No, all changes to the Entry are made immediately available to the Consumers of the !RingBuffer when the producer commits the changes via the !ProducerBarrier.
+No, all changes to the Entry are made immediately available to the Consumers of the !RingBuffer when the producer commits the changes via the !ProducerBarrier.  This is key to low-latency performance.
