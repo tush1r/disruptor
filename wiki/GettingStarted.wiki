@@ -1,4 +1,5 @@
 #summary A guide to checking out the code, building it and running the performance tests
+#labels Phase-Deploy
 
 = Getting Started =
 *1. Check out the project locally to your machine*
