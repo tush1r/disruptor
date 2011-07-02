@@ -10,3 +10,7 @@
 
 ===1.0.6===
  * Cache minimum consumer sequence in producer barriers.  This helps make the performance more predictable on Nehalem processors and greater on earlier Core 2 processors.
+
+===1.0.5===
+ * Removed Entry interface.  All Entries must now extend !AbstractEntry.
+ * Made setSequence package private on !AbstractEntry for encapsulation.
