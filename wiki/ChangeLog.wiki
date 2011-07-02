@@ -1,4 +1,5 @@
 #summary Log of changes between versions
+#labels Changes
 
 ==Changes==
 
