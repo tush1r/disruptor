@@ -1,4 +1,4 @@
-#summary Log of changes between versions.
+#summary Log of changes between versions
 
 ==Changes==
 
