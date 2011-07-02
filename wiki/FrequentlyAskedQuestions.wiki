@@ -1,4 +1,5 @@
 #summary Frequently asked questions on the Disruptor
+#labels FAQ
 
 ==FAQ==
 
