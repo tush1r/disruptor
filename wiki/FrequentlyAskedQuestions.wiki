@@ -1,14 +1,43 @@
 #summary Frequently asked questions on the Disruptor
 #labels FAQ
 
-==FAQ==
-
 <wiki:toc/>
 
-===Q1. Are the entries exchanged in a strict FIFO manner?===
+=== Why is it called the Disruptor? ===
+
+Well there are two reasons.  Primarily we wanted to disrupt the common assumptions in this space because we think that they are wrong. But, to be honest, we also couldn’t resist the temptation; There was some talk about Phasers in Java at the time when we named it and, for those of you too young to care, Phasers were the Federation weapon and Disruptors the Klingon equivalent in Star Trek.
+
+=== Are the entries exchanged in a strict FIFO manner?===
 
 Yes all entries exchanged in a strict FIFO manner based on the claim sequence.
 
-===Q2. Do you relax the consistency model to gain performance?===
+=== Do you relax the consistency model to gain performance?===
 
 No, all changes to the Entry are made immediately available to the Consumers of the !RingBuffer when the producer commits the changes via the !ProducerBarrier.  This is key to low-latency performance.
+
+=== How do you arrange a Disruptor with multiple consumers such that each event is only consumed once? ===
+Short version: you don't.  
+
+The slightly longer answer is that it is really easy to implement inside of a !Consumer.  E.g. if we have 4 consumers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
+
+{{{
+public class MyBatchHandler implements BatchHandler<ValueEntry>
+{
+    private final long ordinal;
+    private final long numberOfConsumers;
+
+    public MyBatchHandler(long ordinal, long numberOfConsumers)
+    {
+        this.ordinal = ordinal;
+        this.numberOfConsumers = numberOfConsumers;
+    }
+
+    public void onAvailable(ValueEntry entry)
+    {
+        if (entry.getSequence() % numberOfConsumers == ordinal)
+        {
+            // Process the entry
+        }
+    }
+}
+}}}
