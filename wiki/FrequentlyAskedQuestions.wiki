@@ -15,7 +15,7 @@ Yes all entries exchanged in a strict FIFO manner based on the claim sequence.
 
 No, all changes to the Entry are made immediately available to the Consumers of the !RingBuffer when the producer commits the changes via the !ProducerBarrier.  This is key to low-latency performance.
 
-=== How do you arrange a Disruptor with multiple consumers such that each event is only consumed once? ===
+=== How do you arrange a Disruptor with multiple consumers so that each event is only consumed once? ===
 Short version: you don't.  
 
 The slightly longer answer is that it is really easy to implement inside of a !Consumer.  E.g. if we have 4 consumers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
