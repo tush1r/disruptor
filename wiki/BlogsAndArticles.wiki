@@ -6,6 +6,6 @@
 
 [http://mechanitis.blogspot.com/2011/06/dissecting-disruptor-how-do-i-read-from.html How do I read from a ring buffer?] - Trisha gives an overview of the `Consumer` and `ConsumerBarrier`, which allows you to read stuff off the ring buffer.
 
-[http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-writing-to-ring.html Dissecting the Disruptor: Writing to the ring buffer] - The third piece from Trisha explaining how to write to the ring buffer, and how it avoids wrapping.
+[http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-writing-to-ring.html Writing to the ring buffer] - The third piece from Trisha explaining how to write to the ring buffer, and how it avoids wrapping.
 
 [http://blog.codeaholics.org/2011/the-disruptor-lock-free-publishing/ Lock-free publishing] - Danny outlines the concepts behind putting items into the ring buffer.
