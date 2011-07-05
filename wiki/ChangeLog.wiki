@@ -3,6 +3,10 @@
 
 ==Changes==
 
+===1.1===
+ * Off by one regression bug in !ProducerBarrier introduced in 1.0.9.
+ * Clarified the algorithm for initial cursor value in the !ClaimStrategy.
+
 ===1.0.9===
  * Added Apache 2.0 licence and comments.
  * Small performance improvements to producers barriers and !BatchConsumer.
