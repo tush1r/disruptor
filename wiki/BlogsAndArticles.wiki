@@ -8,4 +8,6 @@
 
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-writing-to-ring.html Writing to the ring buffer] - The third piece from Trisha explaining how to write to the ring buffer, and how it avoids wrapping.
 
+[http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-wiring-up.html] - Details of how to set up dependencies between multiple consumers.
+
 [http://blog.codeaholics.org/2011/the-disruptor-lock-free-publishing/ Lock-free publishing] - Danny outlines the concepts behind putting items into the ring buffer.
