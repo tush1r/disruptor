@@ -1,6 +1,6 @@
 #summary Links to blog posts and articles covering the Disruptor
 
-= How the Disruptor works =
+= How the Disruptor works and how to use it =
 
 [http://mechanitis.blogspot.com/2011/06/dissecting-disruptor-whats-so-special.html What's so special about a ring buffer?] - A summary by Trisha of the data structure at the heart of the Disruptor patter, how it's implemented and what's so great about it.
 
@@ -11,3 +11,5 @@
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-wiring-up.html Wiring up the dependencies] - Details of how to set up dependencies between multiple consumers.
 
 [http://blog.codeaholics.org/2011/the-disruptor-lock-free-publishing/ Lock-free publishing] - Danny outlines the concepts behind putting items into the ring buffer.
+
+[http://www.symphonious.net/2011/07/11/lmax-disruptor-high-performance-low-latency-and-simple-too/ DSL for wiring up the Disruptor] - Adrian came up with a cunning way to configure your Disruptor
