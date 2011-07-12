@@ -3,6 +3,10 @@
 
 ==Changes==
 
+==1.2.1==
+ * Bug fix for setting the sequence in the !ForceFillProducerBarrier.
+ * Code syntax tidy up.
+
 ==1.2==
  * Bug fix for regression introduced inlining multi-thread producer commit tracking code.  This was a critical bug for the multi-threaded producer scenario.
  * Added new !ProducerBarrier method for claiming a batch of sequences.  This feature can give a significant throughput increase.
