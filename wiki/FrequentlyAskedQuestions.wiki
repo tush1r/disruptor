@@ -18,7 +18,7 @@ No, all changes to the Entry are made immediately available to the Consumers of 
 === How do you arrange a Disruptor with multiple consumers so that each event is only consumed once? ===
 Short version: you don't.  
 
-The slightly longer answer is that it is really easy to implement inside of a !Consumer.  E.g. if we have 4 consumers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
+The slightly longer answer is that it is really easy to implement inside of a Consumer.  E.g. if we have 4 consumers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
 
 {{{
 public class MyBatchHandler implements BatchHandler<ValueEntry>
@@ -34,10 +34,12 @@ public class MyBatchHandler implements BatchHandler<ValueEntry>
 
     public void onAvailable(ValueEntry entry)
     {
-        if (entry.getSequence() % numberOfConsumers == ordinal)
+        if ((entry.getSequence() % numberOfConsumers) == ordinal)
         {
             // Process the entry
         }
     }
 }
 }}}
+
+Some would ask if one consumer takes too long on a transaction it will block all queued on that ordinal.  Technically this is possible but one must consider that the batching then effect kicks in thus saving cost for the backed up requests.  With this approach the concurrency cost are so low you may find even small backups are less costly than a queue based alternative.
