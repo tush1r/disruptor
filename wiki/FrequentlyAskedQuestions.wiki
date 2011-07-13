@@ -21,18 +21,18 @@ Short version: you don't.
 The slightly longer answer is that it is really easy to implement inside of a Consumer.  E.g. if we have 4 consumers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
 
 {{{
-public class MyBatchHandler implements BatchHandler<ValueEntry>
+public final class MyBatchHandler implements BatchHandler<ValueEntry>
 {
     private final long ordinal;
     private final long numberOfConsumers;
 
-    public MyBatchHandler(long ordinal, long numberOfConsumers)
+    public MyBatchHandler(final long ordinal, final long numberOfConsumers)
     {
         this.ordinal = ordinal;
         this.numberOfConsumers = numberOfConsumers;
     }
 
-    public void onAvailable(ValueEntry entry)
+    public void onAvailable(final ValueEntry entry)
     {
         if ((entry.getSequence() % numberOfConsumers) == ordinal)
         {
