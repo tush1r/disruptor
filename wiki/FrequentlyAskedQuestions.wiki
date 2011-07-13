@@ -42,4 +42,4 @@ public class MyBatchHandler implements BatchHandler<ValueEntry>
 }
 }}}
 
-Some would ask if one consumer takes too long on a transaction it will block all queued on that ordinal.  Technically this is possible but one must consider that the batching then effect kicks in thus saving cost for the backed up requests.  With this approach the concurrency cost are so low you may find even small backups are less costly than a queue based alternative.
+Some would ask if one consumer takes too long on a transaction it will block all queued on that ordinal.  Technically this is possible but one must consider that the batching effect then kicks in thus saving cost for those behind.  With this approach the concurrency cost are so low you may find even small backups are less costly than a queue based alternative.
