@@ -17,3 +17,5 @@
 = Why the Disruptor is so fast =
 
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast.html Locks Are Bad] - Trisha gives some basic concurrency background and explains why locks are evil.
+
+[http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast_22.html Magic cache line padding] - An explanation around why the odd cache line padding variables are required, by Trisha.
