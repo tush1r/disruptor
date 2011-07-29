@@ -10,11 +10,11 @@
  * Bug fix for setting the sequence in the !ForceFillProducerBarrier.
  * Code syntax tidy up.
 
-==1.2==
+==1.2.0==
  * Bug fix for regression introduced inlining multi-thread producer commit tracking code.  This was a critical bug for the multi-threaded producer scenario.
  * Added new !ProducerBarrier method for claiming a batch of sequences.  This feature can give a significant throughput increase.
 
-===1.1===
+===1.1.0===
  * Off by one regression bug in !ProducerBarrier introduced in 1.0.9.
  * Clarified the algorithm for initial cursor value in the !ClaimStrategy.
 
