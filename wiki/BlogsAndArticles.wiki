@@ -14,6 +14,8 @@
 
 [http://www.symphonious.net/2011/07/11/lmax-disruptor-high-performance-low-latency-and-simple-too/ DSL for wiring up the Disruptor] - Adrian came up with a cunning way to configure your Disruptor
 
+[http://mechanitis.blogspot.com/2011/08/dissecting-disruptor-why-its-so-fast.html Demystifying Memory Barriers] - Trisha attempts to explain why memory barriers are important in the Disruptor.
+
 = Why the Disruptor is so fast =
 
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast.html Locks Are Bad] - Trisha gives some basic concurrency background and explains why locks are evil.
