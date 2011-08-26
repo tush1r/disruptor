@@ -14,7 +14,7 @@
  * Rework of sequence tracking to avoid false sharing on Java 7, plus avoid mega-morphic calls to make better use of instruction cache
  * Reduced usage of memory barriers where possible
  * !WaitStrategy.YIELDING initially spins for a short period to reduce latency
- * Major performance improvement to give more than 2X increase for throughput across most use cases.
+ * Major performance improvement giving more than a 2X increase for throughput across most use cases.
 
 ==1.2.2==
  * !ProducerBarrier change to yield after busy spinning for a while.  This may help the situation when the the number of producers exceeds the number of cores.
