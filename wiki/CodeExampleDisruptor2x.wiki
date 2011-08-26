@@ -1,0 +1,67 @@
+= Code Example for Disruptor 2.x =
+
+The code below is an example of a single producer and single consumer using the convenience interface `!EventHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
+
+!RingBuffer entry as the item of data exchange.
+{{{
+public final class ValueEvent extends AbstractEvent
+{
+    private long value;
+
+    public long getValue()
+    {
+        return value;
+    }
+
+    public void setValue(final long value)
+    {
+        this.value = value;
+    }
+
+    public final static EventFactory<ValueEvent> EVENT_FACTORY = new EventFactory<ValueEvent>()
+    {
+        public ValueEvent create()
+        {
+            return new ValueEvent();
+        }
+    };
+}
+}}}
+
+Consumers implement this interface for convenience.
+{{{
+// Callback handler which can be implemented by consumers
+final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
+{
+    public void onEvent(final ValueEvent event, final boolean endOfBatch) throws Exception
+    {
+        // process a new event.
+    }
+};
+}}}
+
+Setup the !RingBuffer and barriers.
+{{{
+RingBuffer<ValueEvent> ringBuffer =
+    new RingBuffer<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE,
+                               ClaimStrategy.Option.SINGLE_THREADED,
+                               WaitStrategy.Option.YIELDING);
+
+DependenceBarrier<ValueEvent barrier = ringBuffer.newDependencyBarrier();       
+BatchEventProcessor<ValueEvent> eventProcessor = new BatchEventProcessor<ValueEvent>(barrier, handler);
+ringBuffer.setTrackedProcessors(eventProcessor);  
+
+// Each EventProcessor can run on a separate thread
+EXECUTOR.submit(eventProcessor);
+}}}
+
+Publisher claims events for publishing to !EventProcessors.
+{{{
+// Publisher claim events in sequence
+ValueEvent event = ringBuffer.nextEvent();
+
+event.setValue(1234);
+
+// make the event available to EventProcessors
+ringBuffer.publish(event);   
+}}}
