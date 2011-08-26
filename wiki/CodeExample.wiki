@@ -1,7 +1,7 @@
 #summary An example of a single producer and single consumer
 #labels code,article-sc
 
-= Code Example =
+= Code Example for Disruptor 1.x =
 
 The code below is an example of a single producer and single consumer using the convenience interface `BatchHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
 
