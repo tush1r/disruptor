@@ -1,4 +1,4 @@
-#summary An example of a single producer and single consumer
+#summary An example of a single producer and single consumer for Disruptor 1.x
 #labels code,article-sc
 
 = Code Example for Disruptor 1.x =
