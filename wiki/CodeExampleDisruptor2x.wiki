@@ -1,3 +1,5 @@
+#summary An example of a single publisher and single event processor for Disruptor 2.x
+
 = Code Example for Disruptor 2.x =
 
 The code below is an example of a single producer and single consumer using the convenience interface `!EventHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
