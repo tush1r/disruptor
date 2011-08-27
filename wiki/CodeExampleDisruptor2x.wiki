@@ -4,7 +4,7 @@
 
 The code below is an example of a single producer and single consumer using the convenience interface `EventHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
 
-!RingBuffer entry as the item of data exchange.
+!RingBuffer events as the item of data exchange.  These event objects as simple or complex as your application needs.
 {{{
 public final class ValueEvent extends AbstractEvent
 {
@@ -30,7 +30,7 @@ public final class ValueEvent extends AbstractEvent
 }
 }}}
 
-Consumers implement this interface for convenience.
+Event processor implement this interface for convenience.
 {{{
 // Callback handler which can be implemented by consumers
 final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
@@ -42,7 +42,7 @@ final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
 };
 }}}
 
-Setup the !RingBuffer and barriers.
+Setup the !RingBuffer and barriers.  The DSL Wizard can be used for convenience as an alternative.
 {{{
 RingBuffer<ValueEvent> ringBuffer =
     new RingBuffer<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE,
@@ -57,7 +57,7 @@ ringBuffer.setTrackedProcessors(eventProcessor);
 EXECUTOR.submit(eventProcessor);
 }}}
 
-Publisher claims events for publishing to !EventProcessors.
+Publisher claims events in sequence for publishing to !EventProcessors.
 {{{
 // Publisher claim events in sequence
 ValueEvent event = ringBuffer.nextEvent();
