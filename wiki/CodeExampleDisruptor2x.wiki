@@ -2,7 +2,7 @@
 
 = Code Example for Disruptor 2.x =
 
-The code below is an example of a single producer and single consumer using the convenience interface `!EventHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
+The code below is an example of a single producer and single consumer using the convenience interface `EventHandler` for implementing a consumer.  The consumer runs on a separate thread receiving entries as they become available.
 
 !RingBuffer entry as the item of data exchange.
 {{{
