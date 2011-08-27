@@ -30,9 +30,8 @@ public final class ValueEvent extends AbstractEvent
 }
 }}}
 
-Event processor implement this interface for convenience.
+Event processors implement this interface for convenience.
 {{{
-// Callback handler which can be implemented by consumers
 final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
 {
     public void onEvent(final ValueEvent event, final boolean endOfBatch) throws Exception
@@ -59,10 +58,10 @@ EXECUTOR.submit(eventProcessor);
 
 Publisher claims events in sequence for publishing to !EventProcessors.
 {{{
-// Publisher claim events in sequence
+// Publishers claim events in sequence
 ValueEvent event = ringBuffer.nextEvent();
 
-event.setValue(1234);
+event.setValue(1234); // this could be more complex with multiple fields
 
 // make the event available to EventProcessors
 ringBuffer.publish(event);   
