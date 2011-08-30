@@ -41,7 +41,7 @@ final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
 };
 }}}
 
-Setup the !RingBuffer and barriers.  The DSL Wizard can be used for convenience as an alternative.
+Setup the !RingBuffer and barriers.
 {{{
 RingBuffer<ValueEvent> ringBuffer =
     new RingBuffer<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE,
@@ -54,6 +54,17 @@ ringBuffer.setTrackedProcessors(eventProcessor);
 
 // Each EventProcessor can run on a separate thread
 EXECUTOR.submit(eventProcessor);
+}}}
+
+For most situations, the DSLWizard can be used to simplify the setup. The equivalent ring buffer and processor setup when using the DSLWizard would be:
+
+{{{
+DisruptorWizard<ValueEvent> dw =
+  new DisruptorWizard<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR, 
+                                       ClaimStrategy.Option.SINGLE_THREADED,
+                                       WaitStrategy.Option.YIELDING);
+dw.handleEventsWith(handler);
+RingBuffer<ValueEvent> ringBuffer = dw.start();
 }}}
 
 Publisher claims events in sequence for publishing to !EventProcessors.
