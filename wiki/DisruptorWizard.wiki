@@ -23,7 +23,7 @@ Then we add the event handlers which will process events in parallel:
 dw.handleEventsWith(handler1, handler2, handler3, handler4);
 }}}
 
-And finally start the event handler threads and retrieve the configured RingBuffer:
+And finally start the event handler threads and retrieve the configured !RingBuffer:
 
 {{{
 RingBuffer<ValueEvent> ringBuffer = dw.start();
