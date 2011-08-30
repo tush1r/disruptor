@@ -14,6 +14,8 @@
 
 [http://www.symphonious.net/2011/08/13/the-disruptor-wizard-is-dead-long-live-the-disruptor-wizard/ Disruptor wizard now part of the Disruptor] - Adrian's wizard now makes it easy to configure your very own Disruptor straight out of the box
 
+[http://mechanitis.blogspot.com/2011/08/disruptor-20-all-change-please.html Disruptor version 2.0] - Trisha outlines the cosmetic changes to the Disruptor in version 2.0.
+
 = Why the Disruptor is so fast =
 
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast.html Locks Are Bad] - Trisha gives some basic concurrency background and explains why locks are evil.
