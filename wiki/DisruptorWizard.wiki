@@ -29,7 +29,7 @@ And finally start the event handler threads and retrieve the configured RingBuff
 RingBuffer<ValueEvent> dw.start();
 }}}
 
-Producers can then use the RingBuffer's nextEvent and publish functions as normal to add events to the ring buffer.
+Producers can then use the !RingBuffer's nextEvent and publish functions as normal to add events to the ring buffer.
 
 == Dependencies ==
 
