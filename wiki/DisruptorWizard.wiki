@@ -26,7 +26,7 @@ dw.handleEventsWith(handler1, handler2, handler3, handler4);
 And finally start the event handler threads and retrieve the configured RingBuffer:
 
 {{{
-RingBuffer<ValueEvent> dw.start();
+RingBuffer<ValueEvent> ringBuffer = dw.start();
 }}}
 
 Producers can then use the !RingBuffer's nextEvent and publish functions as normal to add events to the ring buffer.
