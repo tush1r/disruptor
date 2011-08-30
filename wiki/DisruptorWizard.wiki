@@ -1,0 +1,49 @@
+#How to use the DisruptorWizard to simplify setting up the ring buffer.
+
+= Introduction =
+
+The DisruptorWizard is a simple DSL-style API to make it simpler to setup event handlers and express the dependencies between them.
+
+== Parallel Event Handlers ==
+
+First create the wizard with the desired configuration for the ring buffer:
+
+{{{
+DisruptorWizard<ValueEvent> dw =
+  new DisruptorWizard<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR,
+                                 ClaimStrategy.Option.SINGLE_THREADED,
+                                 WaitStrategy.Option.YIELDING);
+}}}
+
+Note that we pass in an Executor instance which will be used to execute the event handlers in their own thread.
+
+Then we add the event handlers which will process events in parallel:
+
+{{{
+dw.handleEventsWith(handler1, handler2, handler3, handler4);
+}}}
+
+And finally start the event handler threads and retrieve the configured RingBuffer:
+
+{{{
+RingBuffer<ValueEvent> dw.start();
+}}}
+
+Producers can then use the RingBuffer's nextEvent and publish functions as normal to add events to the ring buffer.
+
+== Dependencies ==
+
+Dependencies between handlers can be expressed in the DisruptorWizard by chaining them together, for example:
+
+{{{dw.handleEventsWith(handler1).then(handler2, handler3, handler4);}}}
+
+In this case handler 1 must process events first, with handler 2, 3 and 4 processing them in parallel after that.  Dependency chains can also be created, so to ensure each handler processes events in sequence:
+
+{{{dw.handleEventsWith(handler1).then(handler2).then(handler3).then(handler4);}}}
+
+Multiple chains can also be created:
+
+{{{
+dw.handleEventsWith(handler1).then(handler2);
+dw.handleEventsWith(handler3).then(handler4);
+}}}
