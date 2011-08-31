@@ -4,8 +4,7 @@
 ==Changes==
 
 ==2.0.1==
- * Renaming mistake for publishEventAtSequence should have been
-claimEventAtSequence
+ * Renaming mistake for publishEventAtSequence should have been claimEventAtSequence
  * Fixed bug in !YieldingStrategy that was busy spinning more than yielding and introduced !SleepingStrategy
  * Removed code duplication in Unicast perf tests for expected result
 
