@@ -3,6 +3,12 @@
 
 ==Changes==
 
+==2.0.1==
+ * Renaming mistake for publishEventAtSequence should have been
+claimEventAtSequence
+ * Fixed bug in !YieldingStrategy that was busy spinning more than yielding and introduced !SleepingStrategy
+ * Removed code duplication in Unicast perf tests for expected result
+
 ==2.0.0==
  * New API to reflect naming changes
    * Producer -> Publisher
