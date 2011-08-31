@@ -3,6 +3,9 @@
 
 ==Changes==
 
+==2.0.2==
+ * Rework of "False Sharing" prevention which makes the performance much more predictable across all platforms. Special thanks to Jeff Hain for helping focus in on a solution.
+
 ==2.0.1==
  * Renaming mistake for publishEventAtSequence should have been claimEventAtSequence
  * Fixed bug in !YieldingStrategy that was busy spinning more than yielding and introduced !SleepingStrategy
