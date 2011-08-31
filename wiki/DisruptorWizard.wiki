@@ -1,4 +1,4 @@
-#How to use the DisruptorWizard to simplify setting up the ring buffer.
+#summary How to use the DisruptorWizard to simplify setting up the ring buffer.
 
 = Introduction =
 
