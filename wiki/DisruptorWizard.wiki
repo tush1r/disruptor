@@ -48,6 +48,33 @@ disruptor.handleEventsWith(handler1).then(handler2);
 disruptor.handleEventsWith(handler3).then(handler4);
 }}}
 
+== Using Custom EventProcessors ==
+
+The most common usage of the Disruptor is to provide an EventHandler and have the Disruptor create a BatchEventProcessor instance automatically. In cases where the behaviour of BatchEventProcessor is not suitable, it is possible to use other types of EventProcessor as part of the dependency chain.
+
+To set up a custom event processor to process events from the ring buffer:
+
+{{{
+RingBuffer<TestEvent> ringBuffer = disruptor.getRingBuffer();
+DependencyBarrier barrier = ringBuffer.newBarrier();
+final MyEventProcessor customProcessor = new MyEventProcessor(ringBuffer, barrier);
+disruptor.handleEventsWith(processor);
+disruptor.start();
+}}}
+
+The Disruptor will execute the custom processor when the start() method is called.  Then to require the custom processor handle events before a BatchEventHandler:
+
+{{{
+disruptor.after(customProcessor).handleEventsWith(anEventHandler);
+}}}
+
+Alternatively, to require a BatchEventHandler to process events before the custom processor, the DependencyBarrier can be created from the Disruptor:
+
+{{{
+DependencyBarrier barrier = disruptor.after(batchEventHandler1, batchEventHandler2).asDependencyBarrier();
+final MyEventProcessor customProcessor = new MyEventProcessor(ringBuffer, barrier);
+}}}
+
 == Publishing Events ==
 
 The Disruptor provides a convenience method to make publishing events to the ring buffer simpler  - publishEvent(EventTranslator).  For example a publisher could be written as:
