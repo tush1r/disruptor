@@ -47,3 +47,39 @@ Multiple chains can also be created:
 disruptor.handleEventsWith(handler1).then(handler2);
 disruptor.handleEventsWith(handler3).then(handler4);
 }}}
+
+== Publishing Events ==
+
+The Disruptor provides a convenience method to make publishing events to the ring buffer simpler  - publishEvent(EventTranslator).  For example a publisher could be written as:
+{{{
+public class MyPublisher implements EventTranslator, Runnable
+{
+
+  private Object computedValue;
+  private Disruptor disruptor;
+
+  public MyPublisher(Disruptor disruptor)
+  {
+    this.disruptor = disruptor;
+  }
+
+  public void run()
+  {
+    while (true)
+    {
+      computedValue = doLongRunningComputation();
+      disruptor.publishEvent(this);
+    }
+  }
+
+  public void translateTo(MyEvent event, long sequence)
+  {
+    event.setComputedValue(computedValue);
+  }
+
+  private Object doLongRunningComputation()
+  {
+    ...
+  }
+}
+}}}
