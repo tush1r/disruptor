@@ -59,12 +59,12 @@ EXECUTOR.submit(eventProcessor);
 For most situations, the DSLWizard can be used to simplify the setup. The equivalent ring buffer and processor setup when using the DSLWizard would be:
 
 {{{
-DisruptorWizard<ValueEvent> dw =
-  new DisruptorWizard<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR, 
+Disruptor<ValueEvent> disruptor =
+  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR, 
                                        ClaimStrategy.Option.SINGLE_THREADED,
                                        WaitStrategy.Option.YIELDING);
-dw.handleEventsWith(handler);
-RingBuffer<ValueEvent> ringBuffer = dw.start();
+disruptor.handleEventsWith(handler);
+RingBuffer<ValueEvent> ringBuffer = disruptor.start();
 }}}
 
 Publisher claims events in sequence for publishing to !EventProcessors.
@@ -77,3 +77,9 @@ event.setValue(1234); // this could be more complex with multiple fields
 // make the event available to EventProcessors
 ringBuffer.publish(event);   
 }}}
+
+or with the Disruptor DSL:
+{{{
+disruptor.publishEvent(eventTranslator);
+}}}
+where eventTranslator is an instance of the class com.lmax.disruptor.EventTranslator. The translateTo method will be called to copy data into the supplied event from the ring buffer.
