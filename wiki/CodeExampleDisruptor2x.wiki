@@ -48,7 +48,7 @@ RingBuffer<ValueEvent> ringBuffer =
                                ClaimStrategy.Option.SINGLE_THREADED,
                                WaitStrategy.Option.YIELDING);
 
-SequenceBarrier<ValueEvent barrier = ringBuffer.newBarrier();       
+SequenceBarrier<ValueEvent> barrier = ringBuffer.newBarrier();       
 BatchEventProcessor<ValueEvent> eventProcessor = new BatchEventProcessor<ValueEvent>(barrier, handler);
 ringBuffer.setGatingSequences(eventProcessor.getSequence());  
 
