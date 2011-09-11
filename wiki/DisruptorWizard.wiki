@@ -48,7 +48,7 @@ disruptor.handleEventsWith(handler1).then(handler2);
 disruptor.handleEventsWith(handler3).then(handler4);
 }}}
 
-== Using Custom EventProcessors ==
+== Using Custom !EventProcessors ==
 
 The most common usage of the Disruptor is to provide an EventHandler and have the Disruptor create a BatchEventProcessor instance automatically. In cases where the behaviour of BatchEventProcessor is not suitable, it is possible to use other types of EventProcessor as part of the dependency chain.
 
