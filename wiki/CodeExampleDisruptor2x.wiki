@@ -6,7 +6,7 @@ The code below is an example of a single producer and single consumer using the 
 
 !RingBuffer events as the item of data exchange.  These event objects as simple or complex as your application needs.
 {{{
-public final class ValueEvent extends AbstractEvent
+public final class ValueEvent
 {
     private long value;
 
@@ -34,7 +34,7 @@ Event processors implement this interface for convenience.
 {{{
 final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
 {
-    public void onEvent(final ValueEvent event, final boolean endOfBatch) throws Exception
+    public void onEvent(final ValueEvent event, final long sequence, final boolean endOfBatch) throws Exception
     {
         // process a new event.
     }
@@ -48,9 +48,9 @@ RingBuffer<ValueEvent> ringBuffer =
                                ClaimStrategy.Option.SINGLE_THREADED,
                                WaitStrategy.Option.YIELDING);
 
-DependenceBarrier<ValueEvent barrier = ringBuffer.newDependencyBarrier();       
+SequenceBarrier<ValueEvent barrier = ringBuffer.newBarrier();       
 BatchEventProcessor<ValueEvent> eventProcessor = new BatchEventProcessor<ValueEvent>(barrier, handler);
-ringBuffer.setTrackedProcessors(eventProcessor);  
+ringBuffer.setGatingSequences(eventProcessor.getSequence());  
 
 // Each EventProcessor can run on a separate thread
 EXECUTOR.submit(eventProcessor);
@@ -70,12 +70,13 @@ RingBuffer<ValueEvent> ringBuffer = disruptor.start();
 Publisher claims events in sequence for publishing to !EventProcessors.
 {{{
 // Publishers claim events in sequence
-ValueEvent event = ringBuffer.nextEvent();
+long sequence = ringBuffer.next();
+ValueEvent event = ringBuffer.get(sequence);
 
 event.setValue(1234); // this could be more complex with multiple fields
 
 // make the event available to EventProcessors
-ringBuffer.publish(event);   
+ringBuffer.publish(sequence);   
 }}}
 
 or with the Disruptor DSL:
