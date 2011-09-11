@@ -35,11 +35,15 @@ Producers can then use the !RingBuffer's nextEvent and publish functions as norm
 
 Dependencies between handlers can be expressed in the Disruptor by chaining them together, for example:
 
-{{{disruptor.handleEventsWith(handler1).then(handler2, handler3, handler4);}}}
+{{{
+disruptor.handleEventsWith(handler1).then(handler2, handler3, handler4);
+}}}
 
 In this case handler 1 must process events first, with handler 2, 3 and 4 processing them in parallel after that.  Dependency chains can also be created, so to ensure each handler processes events in sequence:
 
-{{{disruptor.handleEventsWith(handler1).then(handler2).then(handler3).then(handler4);}}}
+{{{
+disruptor.handleEventsWith(handler1).then(handler2).then(handler3).then(handler4);
+}}}
 
 Multiple chains can also be created:
 
@@ -50,28 +54,28 @@ disruptor.handleEventsWith(handler3).then(handler4);
 
 == Using Custom !EventProcessors ==
 
-The most common usage of the Disruptor is to provide an EventHandler and have the Disruptor create a BatchEventProcessor instance automatically. In cases where the behaviour of BatchEventProcessor is not suitable, it is possible to use other types of EventProcessor as part of the dependency chain.
+The most common usage of the Disruptor is to provide an !EventHandler and have the Disruptor create a !BatchEventProcessor instance automatically. In cases where the behaviour of !BatchEventProcessor is not suitable, it is possible to use other types of !EventProcessor as part of the dependency chain.
 
 To set up a custom event processor to process events from the ring buffer:
 
 {{{
 RingBuffer<TestEvent> ringBuffer = disruptor.getRingBuffer();
-DependencyBarrier barrier = ringBuffer.newBarrier();
+SequenceBarrier barrier = ringBuffer.newBarrier();
 final MyEventProcessor customProcessor = new MyEventProcessor(ringBuffer, barrier);
 disruptor.handleEventsWith(processor);
 disruptor.start();
 }}}
 
-The Disruptor will execute the custom processor when the start() method is called.  Then to require the custom processor handle events before a BatchEventHandler:
+The Disruptor will execute the custom processor when the start() method is called.  Then to require the custom processor handle events before a !BatchEventHandler:
 
 {{{
 disruptor.after(customProcessor).handleEventsWith(anEventHandler);
 }}}
 
-Alternatively, to require a BatchEventHandler to process events before the custom processor, the DependencyBarrier can be created from the Disruptor:
+Alternatively, to require a !BatchEventHandler to process events before the custom processor, the !SequenceBarrier can be created from the Disruptor:
 
 {{{
-DependencyBarrier barrier = disruptor.after(batchEventHandler1, batchEventHandler2).asDependencyBarrier();
+SequenceBarrier barrier = disruptor.after(batchEventHandler1, batchEventHandler2).asBarrier();
 final MyEventProcessor customProcessor = new MyEventProcessor(ringBuffer, barrier);
 }}}
 
@@ -81,7 +85,6 @@ The Disruptor provides a convenience method to make publishing events to the rin
 {{{
 public class MyPublisher implements EventTranslator, Runnable
 {
-
   private Object computedValue;
   private Disruptor disruptor;
 
