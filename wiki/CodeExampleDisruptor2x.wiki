@@ -83,4 +83,4 @@ or with the Disruptor DSL:
 {{{
 disruptor.publishEvent(eventTranslator);
 }}}
-where eventTranslator is an instance of the class com.lmax.disruptor.EventTranslator. The translateTo method will be called to copy data into the supplied event from the ring buffer.
+where eventTranslator is an instance of the class com.lmax.disruptor.!EventTranslator. The translateTo method will be called to copy data into the supplied event from the ring buffer.
