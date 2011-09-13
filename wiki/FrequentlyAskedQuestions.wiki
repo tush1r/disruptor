@@ -18,7 +18,7 @@ No, all changes to an event are made immediately available to the !EventProcesso
 === How do you arrange a Disruptor with multiple consumers so that each event is only consumed once? ===
 Short version: you don't.  
 
-The slightly longer answer is that it is really easy to implement inside of a EventHandler/EventProcessor.  E.g. if we have 4 handlers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
+The slightly longer answer is that it is really easy to implement inside of a !EventHandler/!EventProcessor.  E.g. if we have 4 handlers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
 
 {{{
 public final class MyHandler implements EventHandler<ValueEntry>
