@@ -9,7 +9,7 @@
  * !DisruptorWizard has been renamed to Disruptor with added support for any subtype of !EventProcessor
  * Introduced a new Sequencer class that allows the Disruptor to be applied to other data structures such as multiple arrays.  This can be a very useful pattern when multiple event processors work on the same event and you want to avoid false sharing.  The Diamond for !FizzBuzz is a good example of the issue.  It is also higher performance by avoiding the pointer indirection when arrays of primitives are used.
  * Further increased performance and scalability by reducing false sharing.
- * Added progressive backoff strategy to the !MultiThreadedClaimStrategy to prevent publisher getting into the claim cycle when the buffer is full because of a slow consumer.
+ * Added progressive backoff strategy to the !MultiThreadedClaimStrategy to prevent publisher getting into the claim cycle when the buffer is full because of a slow !EventProcessor.
  * Significantly improved performance to !WaitStrategy.Option.BLOCKING
  * Introduced !SequenceGroup to allow dynamic registration of !EventProcessors.
 
