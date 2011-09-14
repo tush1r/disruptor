@@ -23,3 +23,7 @@
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast_22.html Magic cache line padding] - An explanation around why the odd cache line padding variables are required, by Trisha.
 
 [http://mechanitis.blogspot.com/2011/08/dissecting-disruptor-why-its-so-fast.html Demystifying Memory Barriers] - Trisha attempts to explain why memory barriers are important in the Disruptor.
+
+= What some other people have written about he Disruptor =
+
+[http://martinfowler.com/articles/lmax.html LMAX Architecture] by Martin Fowler.
