@@ -27,3 +27,5 @@
 = What some other people have written about the Disruptor =
 
 [http://martinfowler.com/articles/lmax.html LMAX Architecture] by Martin Fowler.
+
+Processing [http://blog.jteam.nl/2011/07/20/processing-1m-tps-with-axon-framework-and-the-disruptor/ 1m TPS] with the Axon Framework using the Disruptor.
