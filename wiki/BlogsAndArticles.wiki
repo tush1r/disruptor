@@ -24,6 +24,6 @@
 
 [http://mechanitis.blogspot.com/2011/08/dissecting-disruptor-why-its-so-fast.html Demystifying Memory Barriers] - Trisha attempts to explain why memory barriers are important in the Disruptor.
 
-= What some other people have written about he Disruptor =
+= What some other people have written about the Disruptor =
 
 [http://martinfowler.com/articles/lmax.html LMAX Architecture] by Martin Fowler.
