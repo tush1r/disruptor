@@ -3,6 +3,12 @@
 
 ==Changes==
 
+==2.5.1==
+ * Bugfix for supporting !SequenceReportingEventHandler from DSL. (issue 9)
+ * Bugfix for multi-threaded publishing to multiple ring buffers (issue 10)
+ * Change !SequenceBarrier to always check alert status before entering waitFor cycle.  Previously this was only checked when the requested sequence was not available.
+ * Change !ClaimStrategy to not spin when the buffer has no available capacity, instead go straight to yielding to allow event processors to catch up.
+
 ==2.5==
  * Changed !RingBuffer and publisher API so any mutable object can be placed in the !RingBuffer without having to extend !AbstractEvent
  * Added !EventPublisher implementation to allow the publishing steps to be combined into one action
