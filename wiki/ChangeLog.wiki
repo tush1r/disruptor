@@ -4,11 +4,10 @@
 ==Changes==
 
 ==2.6==
- * Introduced !WorkerPool to allow the consumption of a single event by a worker in a pool of !EventProcessors.
+ * Introduced !WorkerPool to allow the one time consumption of events by a worker in a pool of !EventProcessors.
  * New internal implementation !SequenceGroup that is lock free at all times and garbage free for normal operation.
  * !SequenceBarrier now checks alert status on every call whether it is blocking or not.
  * Added scripts in preparation for publishing binaries to maven repository.
-
 
 ==2.5.1==
  * Bugfix for supporting !SequenceReportingEventHandler from DSL. (issue 9)
