@@ -5,7 +5,7 @@
 
 ==2.6==
  * Introduced !WorkerPool to allow the one time consumption of events by a worker in a pool of !EventProcessors.
- * New internal implementation !SequenceGroup that is lock free at all times and garbage free for normal operation.
+ * New internal implementation of !SequenceGroup which is lock free at all times and garbage free for get and set operations.
  * !SequenceBarrier now checks alert status on every call whether it is blocking or not.
  * Added scripts in preparation for publishing binaries to maven repository.
 
