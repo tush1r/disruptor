@@ -3,6 +3,15 @@
 
 ==Changes==
 
+==2.7==
+ * Changed construction API to allow claim and wait strategies to be user supplied
+ * Added !AggregateEventHandler to support multiple !EventHandlers from a single !BatchEventProcessor
+ * Support exception handling from !LifecycleAware
+ * Added timeout API calls for claiming a sequence when publishing
+ * Use !LockSupport.parkNanos instead of Thread.sleep to reduce latency
+ * Reworked performance tests to better support profiling and use !LinkedBlockingQueue for comparison because it performs better on the latest processors
+ * Minor bugfixes
+
 ==2.6==
  * Introduced !WorkerPool to allow the one time consumption of events by a worker in a pool of !EventProcessors.
  * New internal implementation of !SequenceGroup which is lock free at all times and garbage free for get and set operations.
