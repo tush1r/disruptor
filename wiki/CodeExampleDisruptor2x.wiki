@@ -44,9 +44,9 @@ final EventHandler<ValueEvent> handler = new EventHandler<ValueEvent>()
 Setup the !RingBuffer and barriers.
 {{{
 RingBuffer<ValueEvent> ringBuffer =
-    new RingBuffer<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE,
-                               ClaimStrategy.Option.SINGLE_THREADED,
-                               WaitStrategy.Option.YIELDING);
+    new RingBuffer<ValueEvent>(ValueEntry.EVENT_FACTORY, 
+                               new SingleThreadedClaimStrategy(RING_SIZE),
+                               new SleepingWaitStrategy());
 
 SequenceBarrier<ValueEvent> barrier = ringBuffer.newBarrier();       
 BatchEventProcessor<ValueEvent> eventProcessor = new BatchEventProcessor<ValueEvent>(barrier, handler);
@@ -60,9 +60,9 @@ For most situations, the DSLWizard can be used to simplify the setup. The equiva
 
 {{{
 Disruptor<ValueEvent> disruptor =
-  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR, 
-                                       ClaimStrategy.Option.SINGLE_THREADED,
-                                       WaitStrategy.Option.YIELDING);
+  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, EXECUTOR, 
+                            new SingleThreadedClaimStrategy(RING_SIZE),
+                            new SleepingWaitStrategy());
 disruptor.handleEventsWith(handler);
 RingBuffer<ValueEvent> ringBuffer = disruptor.start();
 }}}
