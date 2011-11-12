@@ -20,7 +20,7 @@ We tested the performance of the disruptor in a number of graph configurations a
 
 =Throughput Performance Testing=
 
-As a reference we choose Doug Lea’s excellent [http://download.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ArrayBlockingQueue.html java.util.concurrent.ArrayBlockingQueue] which has the highest performance of any bounded queue based on our testing.  The tests are conducted in a blocking programming style to match that of the Disruptor.  The tests cases detailed below are available in the Disruptor open source project.  *Note:* running the tests requires a system capable of executing at least 4 threads in parallel.
+As a reference we choose Doug Lea’s excellent [http://download.oracle.com/javase/1.5.0/docs/api/java/util/concurrent/ArrayBlockingQueue.html java.util.concurrent.ArrayBlockingQueue] which has the highest performance of any bounded queue based on our testing.  The tests are conducted in a blocking programming style to match that of the Disruptor.  The tests cases detailed below are available in the Disruptor open source project.  *Note:* running the tests requires a system capable of executing at *least 4 threads* in parallel.
 
 
 ===Nehalem 2.8Ghz – Windows 7 SP1 64-bit===
