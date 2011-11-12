@@ -10,9 +10,9 @@ First create the wizard with the desired configuration for the ring buffer:
 
 {{{
 Disruptor<ValueEvent> disruptor =
-  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, RING_SIZE, EXECUTOR,
-                                 ClaimStrategy.Option.SINGLE_THREADED,
-                                 WaitStrategy.Option.YIELDING);
+  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, EXECUTOR,
+                            new SingleThreadedClaimStrategy(RING_SIZE),
+                            new SleepingWaitStrategy());
 }}}
 
 Note that we pass in an Executor instance which will be used to execute the event handlers in their own thread.
