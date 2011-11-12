@@ -33,7 +33,6 @@ Comparative throughput (in ops per sec)
 || Multicast: 1P – 3C || 1,077,384 || 9,377,871 || 
 || Diamond: 1P – 3C || 2,113,941 || 16,143,613 || 
 
-<br/>
 ===Sandy Bridge 2.2Ghz – Linux 2.6.38 64-bit===
 Comparative throughput (in ops per sec)
 || || *Array Blocking Queue* || *Disruptor* || 
