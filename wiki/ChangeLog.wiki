@@ -8,7 +8,7 @@
  * Added !AggregateEventHandler to support multiple !EventHandlers from a single !BatchEventProcessor
  * Support exception handling from !LifecycleAware
  * Added timeout API calls for claiming a sequence when publishing
- * Use !LockSupport.parkNanos() instead of Thread.sleep to reduce latency
+ * Use !LockSupport.parkNanos() instead of Thread.sleep() to reduce latency
  * Reworked performance tests to better support profiling and use !LinkedBlockingQueue for comparison because it performs better on the latest processors
  * Minor bugfixes
 
