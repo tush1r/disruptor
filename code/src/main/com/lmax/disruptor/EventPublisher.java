@@ -15,8 +15,6 @@
  */
 package com.lmax.disruptor;
 
-import java.util.concurrent.TimeUnit;
-
 /**
  * Utility class for simplifying publication to the ring buffer.
  */
@@ -44,28 +42,6 @@ public class EventPublisher<E>
     public void publishEvent(final EventTranslator<E> translator)
     {
         final long sequence = ringBuffer.next();
-        translateAndPublish(translator, sequence);
-    }
-    
-    /**
-     * Publishes an event to the ring buffer.  It handles
-     * claiming the next sequence, getting the current (uninitialized) 
-     * event from the ring buffer and publishing the claimed sequence
-     * after translation.
-     * 
-     * @param translator The user specified translation for the event
-     * @param timeout period to wait
-     * @param units for the timeout period
-     * @throws TimeoutException if the timeout period has expired
-     */
-    public void publishEvent(final EventTranslator<E> translator, long timeout, TimeUnit units) throws TimeoutException
-    {
-        final long sequence = ringBuffer.next(timeout, units);
-        translateAndPublish(translator, sequence);
-    }
-
-    private void translateAndPublish(final EventTranslator<E> translator, final long sequence)
-    {
         try
         {
             translator.translateTo(ringBuffer.get(sequence), sequence);
