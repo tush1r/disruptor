@@ -10,7 +10,7 @@ First create the wizard with the desired configuration for the ring buffer:
 
 {{{
 Disruptor<ValueEvent> disruptor =
-  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, EXECUTOR,
+  new Disruptor<ValueEvent>(ValueEvent.EVENT_FACTORY, EXECUTOR,
                             new SingleThreadedClaimStrategy(RING_SIZE),
                             new SleepingWaitStrategy());
 }}}
