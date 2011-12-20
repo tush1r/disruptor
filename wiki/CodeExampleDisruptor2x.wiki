@@ -60,7 +60,7 @@ For most situations, the DSLWizard can be used to simplify the setup. The equiva
 
 {{{
 Disruptor<ValueEvent> disruptor =
-  new Disruptor<ValueEvent>(ValueEntry.EVENT_FACTORY, EXECUTOR, 
+  new Disruptor<ValueEvent>(ValueEvent.EVENT_FACTORY, EXECUTOR, 
                             new SingleThreadedClaimStrategy(RING_SIZE),
                             new SleepingWaitStrategy());
 disruptor.handleEventsWith(handler);
