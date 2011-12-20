@@ -43,3 +43,7 @@ public final class MyHandler implements EventHandler<ValueEntry>
 }}}
 
 Some would ask if one consumer takes too long on a transaction it will block all queued on that ordinal.  Technically this is possible but one must consider that the batching effect then kicks in thus saving cost for those behind.  With this approach the concurrency costs are so low you may find even small stalls are less costly than a queue based alternative.
+
+===What size should I make the ring buffer?===
+
+For very high performance the ring buffer, and its contents, should fit in L3 CPU cache for exchanging between threads.  If the ring buffer is used for a replay scenario, such as market data or network recovery, it may be larger and have obvious performance implications from the cache misses. 
