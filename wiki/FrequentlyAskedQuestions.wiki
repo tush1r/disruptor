@@ -21,7 +21,7 @@ Well it depends on how much performance you want.  If you want to do 3X better t
 The slightly longer answer is that it is really easy to implement inside of a !EventHandler/!EventProcessor.  E.g. if we have 4 handlers and assign each an ordinal (0 through 3), then the consumer need only do a modulo operation using the sequence number and the number of consumers and compare it to its ordinal value.
 
 {{{
-public final class MyHandler implements EventHandler<ValueEntry>
+public final class MyHandler implements EventHandler<ValueEvent>
 {
     private final long ordinal;
     private final long numberOfConsumers;
@@ -32,11 +32,11 @@ public final class MyHandler implements EventHandler<ValueEntry>
         this.numberOfConsumers = numberOfConsumers;
     }
 
-    public void onEvent(final ValueEntry entry, final long sequence, final boolean onEndOfBatch)
+    public void onEvent(final ValueEvent entry, final long sequence, final boolean onEndOfBatch)
     {
         if ((sequence % numberOfConsumers) == ordinal)
         {
-            // Process the entry
+            // Process the event
         }
     }
 }
