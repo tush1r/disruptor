@@ -3,6 +3,9 @@
 
 ==Changes==
 
+==2.7.1==
+ * Artefacts made available via maven central repository. (groupId:com.googlecode.disruptor, artifactId:disruptor)
+
 ==2.7==
  * Changed construction API to allow user supplied claim and wait strategies
  * Added !AggregateEventHandler to support multiple !EventHandlers from a single !BatchEventProcessor
