@@ -1,0 +1,17 @@
+#summary Presentations and interviews about the Disruptor.
+
+= Introduction =
+
+There have been a number of presentations about the Disruptor, how it works and how to use it, which have fortunately been captured on video for your perusal.
+
+= Presentations =
+Sorted by date of presentation with the most recent at the top.
+   * November 2011 - Mike Barker at Devoxx: [http://www.parleys.com/d/2828 "The Disruptor - High Performance Inter-Thread Messaging"] (membership required)
+   * November 2011 - Mike Barker & Trisha Gee at JAX London: [http://mechanitis.blogspot.com/2011/12/video-of-our-jax-london-session.html "Understanding the Disruptor - A Beginner's Guide to Hardcore Concurrency"]
+   * October 2011 - Mike Barker & Trisha Gee at the London Java Community: [http://vimeo.com/30781988 "Understanding the Disruptor - A Beginner's Guide to Hardcore Concurrency"]
+   * December 2010 - Martin Thompson & Mike Barker at QCon San Francisco: [http://www.infoq.com/presentations/LMAX "LMAX - How to Do 100K TPS at Less than 1ms Latency"]
+
+= Interviews =
+   * October 2011 - Martin Thompson & Dave Farley: [http://www.infoq.com/interviews/thompson_farley_disruptor_mechanical_sympathy "Hardware friendly, high performance Java-Applications"]
+   * October 2011 - Martin Thompson & Trisha Gee at Java One: [http://medianetwork.oracle.com/video/player/1203095587001 "Duke's Choice Award Winners - The Disruptor"]
+   * October 2011 - Martin Thompson & Trisha Gee at Java One: [http://blogs.oracle.com/javaspotlight/entry/java_spotlight_episode_51_live "Java Spotlight Podcast interview"]
