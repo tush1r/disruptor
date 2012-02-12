@@ -3,9 +3,6 @@
 
 ==Changes==
 
-Disruptor version 2.8 is now available for download.
-Main Fixes:
-
 ==2.8==
  * Create new MultithreadClaimStrategy that works between when threads are highly contended. Previous implementation is now called MultithreadLowContentionClaimStrategy
  * Fix for bug where EventProcessors weren't being added as gating sequences to the ring buffer.
