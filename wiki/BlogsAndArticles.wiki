@@ -16,6 +16,8 @@
 
 [http://mechanitis.blogspot.com/2011/08/disruptor-20-all-change-please.html Disruptor version 2.0] - Trisha outlines the cosmetic changes to the Disruptor in version 2.0.
 
+[http://www.oraclejavamagazine-digital.com/javamagazine/20120304/?pg=56&pm=1&u1=friend Sharing Data Among Threads Without Contention] - An updated and summarised version of Trisha's blogs.
+
 = Why the Disruptor is so fast =
 
 [http://mechanitis.blogspot.com/2011/07/dissecting-disruptor-why-its-so-fast.html Locks Are Bad] - Trisha gives some basic concurrency background and explains why locks are evil.
