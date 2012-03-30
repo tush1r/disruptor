@@ -6,6 +6,7 @@ There have been a number of presentations about the Disruptor, how it works and 
 
 = Presentations =
 Sorted by date of presentation with the most recent at the top.
+   * March 2012 - Trisha Gee at the London Java Community - [http://mechanitis.blogspot.co.uk/2012/03/new-disruptor-presentation-unveiled-to.html Concurrent Programming Using The Disruptor] 
    * November 2011 - Mike Barker at Devoxx: [http://www.parleys.com/d/2828 "The Disruptor - High Performance Inter-Thread Messaging"] (membership required)
    * November 2011 - Mike Barker & Trisha Gee at JAX London: [http://mechanitis.blogspot.com/2011/12/video-of-our-jax-london-session.html "Understanding the Disruptor - A Beginner's Guide to Hardcore Concurrency"]
    * October 2011 - Mike Barker & Trisha Gee at the London Java Community: [http://vimeo.com/30781988 "Understanding the Disruptor - A Beginner's Guide to Hardcore Concurrency"]
