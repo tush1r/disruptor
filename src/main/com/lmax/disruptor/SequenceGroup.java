@@ -28,15 +28,13 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public final class SequenceGroup extends Sequence
 {
-    private final AtomicReference<Sequence[]> sequencesRef;
+    private final AtomicReference<Sequence[]> sequencesRef = new AtomicReference<Sequence[]>(new Sequence[0]);
 
     /**
      * Default Constructor
      */
     public SequenceGroup()
     {
-        super(-1);
-        sequencesRef = new AtomicReference<Sequence[]>(new Sequence[0]);
     }
 
     /**
