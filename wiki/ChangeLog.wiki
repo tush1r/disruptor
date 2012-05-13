@@ -3,15 +3,28 @@
 
 ==Changes==
 
-==2.8==
+==2.10 (13-May-2012 - rev 546) ==
+ * Remove deprecated timeout methods.
+ * Added OSGI metadata to jar file.
+ * Removed PaddedAtomicLong and use Sequence in all places.
+ * Fix various generics warnings.
+ * Change Sequence implementation to work around IBM JDK bug and improve performance by ~10%.
+ * Add a remainingCapacity() call to the Sequencer class.
+
+==2.9 (8-Apr-2012 - rev 534) ==
+ * Deprecate timeout methods for publishing.
+ * Add tryNext and tryPublishEvent for events that shouldn't block during delivery.
+ * Small performance enhancement for !MultithreadClaimStrategy.
+
+==2.8 (6-Feb-2012)==
  * Create new MultithreadClaimStrategy that works between when threads are highly contended. Previous implementation is now called MultithreadLowContentionClaimStrategy
  * Fix for bug where EventProcessors weren't being added as gating sequences to the ring buffer.
  * Fix range tracking bug in Histogram
 
-==2.7.1==
+==2.7.1  (21-Dec-2011)==
  * Artefacts made available via maven central repository. (groupId:com.googlecode.disruptor, artifactId:disruptor) See UsingDisruptorInYourProject for details.
 
-==2.7==
+==2.7 (12-Nov-2011)==
  * Changed construction API to allow user supplied claim and wait strategies
  * Added !AggregateEventHandler to support multiple !EventHandlers from a single !BatchEventProcessor
  * Support exception handling from !LifecycleAware
