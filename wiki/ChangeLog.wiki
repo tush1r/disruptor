@@ -17,8 +17,8 @@
  * Small performance enhancement for !MultithreadClaimStrategy.
 
 ==2.8 (6-Feb-2012)==
- * Create new MultithreadClaimStrategy that works between when threads are highly contended. Previous implementation is now called !MultithreadLowContentionClaimStrategy
- * Fix for bug where EventProcessors weren't being added as gating sequences to the ring buffer.
+ * Create new !MultithreadClaimStrategy that works between when threads are highly contended. Previous implementation is now called !MultithreadLowContentionClaimStrategy
+ * Fix for bug where !EventProcessors weren't being added as gating sequences to the ring buffer.
  * Fix range tracking bug in Histogram
 
 ==2.7.1  (21-Dec-2011)==
