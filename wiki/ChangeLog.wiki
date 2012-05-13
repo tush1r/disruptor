@@ -6,7 +6,7 @@
 ==2.10 (13-May-2012 - rev 546) ==
  * Remove deprecated timeout methods.
  * Added OSGI metadata to jar file.
- * Removed PaddedAtomicLong and use Sequence in all places.
+ * Removed !PaddedAtomicLong and use Sequence in all places.
  * Fix various generics warnings.
  * Change Sequence implementation to work around IBM JDK bug and improve performance by ~10%.
  * Add a remainingCapacity() call to the Sequencer class.
