@@ -3,6 +3,10 @@
 
 ==Changes==
 
+==2.10.1 (6-June-2012 - rev 560) ==
+ * Bug fix, correct OSGI metadata.
+ * Remove unnecessary code in wait strategies.
+
 ==2.10 (13-May-2012 - rev 546) ==
  * Remove deprecated timeout methods.
  * Added OSGI metadata to jar file.
