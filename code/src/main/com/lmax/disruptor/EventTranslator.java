@@ -27,6 +27,7 @@ public interface EventTranslator<T>
      *
      * @param event into which the data should be translated.
      * @param sequence that is assigned to event.
+     * @return the resulting event after it has been updated.
      */
-    void translateTo(final T event, long sequence);
+    T translateTo(final T event, long sequence);
 }

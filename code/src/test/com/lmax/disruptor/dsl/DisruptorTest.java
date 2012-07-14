@@ -24,7 +24,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicReference;
@@ -34,7 +33,7 @@ import static java.util.concurrent.TimeUnit.*;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
-@SuppressWarnings(value = {"unchecked"})
+@SuppressWarnings(value = {"ThrowableResultOfMethodCallIgnored", "unchecked"})
 public class DisruptorTest
 {
     private static final int TIMEOUT_IN_SECONDS = 2;
@@ -191,7 +190,6 @@ public class DisruptorTest
         disruptor.handleEventsWith(delayedEventHandler);
 
         final RingBuffer<TestEvent> ringBuffer = disruptor.start();
-        delayedEventHandler.awaitStart();
 
         final StubPublisher stubPublisher = new StubPublisher(ringBuffer);
         try
@@ -314,7 +312,7 @@ public class DisruptorTest
 
     private void ensureTwoEventsProcessedAccordingToDependencies(final CountDownLatch countDownLatch,
                                                                  final DelayedEventHandler... dependencies)
-        throws InterruptedException, BrokenBarrierException
+        throws InterruptedException
     {
         publishEvent();
         publishEvent();
@@ -364,24 +362,20 @@ public class DisruptorTest
                                              new BlockingWaitStrategy());
     }
 
-    private TestEvent publishEvent() throws InterruptedException, BrokenBarrierException
+    private TestEvent publishEvent()
     {
         if (ringBuffer == null)
         {
             ringBuffer = disruptor.start();
-            
-            for (DelayedEventHandler eventHandler : delayedEventHandlers)
-            {
-                eventHandler.awaitStart();
-            }
         }
 
         disruptor.publishEvent(new EventTranslator<TestEvent>()
         {
             @Override
-            public void translateTo(final TestEvent event, final long sequence)
+            public TestEvent translateTo(final TestEvent event, final long sequence)
             {
                 lastPublishedEvent = event;
+                return event;
             }
         });
 

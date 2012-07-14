@@ -29,7 +29,7 @@ public final class EventTranslatorTest
         StubEvent event = StubEvent.EVENT_FACTORY.newInstance();
         EventTranslator<StubEvent> eventTranslator = new ExampleEventTranslator(TEST_VALUE);
 
-        eventTranslator.translateTo(event, 0);
+        event = eventTranslator.translateTo(event, 0);
 
         Assert.assertEquals(TEST_VALUE, event.getTestString());
     }
@@ -45,9 +45,10 @@ public final class EventTranslatorTest
         }
 
         @Override
-        public void translateTo(final StubEvent event, long sequence)
+        public StubEvent translateTo(final StubEvent event, long sequence)
         {
             event.setTestString(testValue);
+            return event;
         }
     }
 }

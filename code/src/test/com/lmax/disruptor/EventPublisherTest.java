@@ -61,8 +61,9 @@ public class EventPublisherTest implements EventTranslator<LongEvent>
     }
     
     @Override
-    public void translateTo(LongEvent event, long sequence)
+    public LongEvent translateTo(LongEvent event, long sequence)
     {
         event.set(sequence + 29);
+        return event;
     }
 }
