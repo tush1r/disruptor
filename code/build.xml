@@ -33,9 +33,6 @@
     </target>
 
     <target name="main:prepare">
-    	
-    	<echo message="${java.version}"/>
-    	
         <mkdir dir="${dir.main.build}"/>
         <mkdir dir="${dir.dist}"/>
         <mkdir dir="${dir.docs}"/>
@@ -107,10 +104,10 @@
         <perform-tests source.dir="${dir.perf.src}" test.type="perf" include.pattern="**/*ThroughputTest.java"/>
     </target>
 
-    <target name="throughput:single-test"
+    <target name="througput:single-test"
             depends="test:prepare, build"
             description="Run the throughput performance tests">
-        <perform-tests source.dir="${dir.perf.src}" test.type="perf" include.pattern="**/${test.pattern}.java"/>
+        <perform-tests source.dir="${dir.perf.src}" test.type="perf" include.pattern="**/OnePublisherToOneProcessorUniCastThroughputTest.java"/>
     </target>
 
     <target name="throughput:multihreaded-test"

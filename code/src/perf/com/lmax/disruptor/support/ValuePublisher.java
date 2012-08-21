@@ -15,18 +15,17 @@
  */
 package com.lmax.disruptor.support;
 
-import java.util.concurrent.CyclicBarrier;
+import com.lmax.disruptor.RingBuffer;
 
-import com.lmax.disruptor.PreallocatedRingBuffer;
-import com.lmax.disruptor.Sequencer;
+import java.util.concurrent.CyclicBarrier;
 
 public final class ValuePublisher implements Runnable
 {
     private final CyclicBarrier cyclicBarrier;
-    private final PreallocatedRingBuffer<ValueEvent> ringBuffer;
+    private final RingBuffer<ValueEvent> ringBuffer;
     private final long iterations;
 
-    public ValuePublisher(final CyclicBarrier cyclicBarrier, final PreallocatedRingBuffer<ValueEvent> ringBuffer, final long iterations)
+    public ValuePublisher(final CyclicBarrier cyclicBarrier, final RingBuffer<ValueEvent> ringBuffer, final long iterations)
     {
         this.cyclicBarrier = cyclicBarrier;
         this.ringBuffer = ringBuffer;
@@ -36,17 +35,16 @@ public final class ValuePublisher implements Runnable
     @Override
     public void run()
     {
-        Sequencer sequencer = ringBuffer.getSequencer();
         try
         {
             cyclicBarrier.await();
 
             for (long i = 0; i < iterations; i++)
             {
-                long sequence = sequencer.next();
-                ValueEvent event = ringBuffer.getPreallocated(sequence);
+                long sequence = ringBuffer.next();
+                ValueEvent event = ringBuffer.get(sequence);
                 event.setValue(i);
-                sequencer.publish(sequence);
+                ringBuffer.publish(sequence);
             }
         }
         catch (Exception ex)

@@ -38,7 +38,7 @@ public final class BatchEventProcessorTest
     private final Sequence lifecycleSequence = context.sequence("lifecycleSequence");
     private final CountDownLatch latch = new CountDownLatch(1);
 
-    private final PreallocatedRingBuffer<StubEvent> ringBuffer = new PreallocatedRingBuffer<StubEvent>(StubEvent.EVENT_FACTORY, 16);
+    private final RingBuffer<StubEvent> ringBuffer = new RingBuffer<StubEvent>(StubEvent.EVENT_FACTORY, 16);
     private final SequenceBarrier sequenceBarrier = ringBuffer.newBarrier();
     @SuppressWarnings("unchecked") private final EventHandler<StubEvent> eventHandler = context.mock(EventHandler.class);
     private final BatchEventProcessor<StubEvent> batchEventProcessor = new BatchEventProcessor<StubEvent>(ringBuffer, sequenceBarrier, eventHandler);
@@ -59,7 +59,7 @@ public final class BatchEventProcessorTest
         context.checking(new Expectations()
         {
             {
-                oneOf(eventHandler).onEvent(ringBuffer.getPreallocated(0L), 0L, true);
+                oneOf(eventHandler).onEvent(ringBuffer.get(0L), 0L, true);
                 inSequence(lifecycleSequence);
 
                 will(countDown(latch));
@@ -71,8 +71,7 @@ public final class BatchEventProcessorTest
 
         assertEquals(-1L, batchEventProcessor.getSequence().get());
 
-        Sequencer sequencer = ringBuffer.getSequencer();
-        sequencer.publish(sequencer.next());
+        ringBuffer.publish(ringBuffer.next());
 
         latch.await();
 
@@ -87,21 +86,20 @@ public final class BatchEventProcessorTest
         context.checking(new Expectations()
         {
             {
-                oneOf(eventHandler).onEvent(ringBuffer.getPreallocated(0L), 0L, false);
+                oneOf(eventHandler).onEvent(ringBuffer.get(0L), 0L, false);
                 inSequence(lifecycleSequence);
-                oneOf(eventHandler).onEvent(ringBuffer.getPreallocated(1L), 1L, false);
+                oneOf(eventHandler).onEvent(ringBuffer.get(1L), 1L, false);
                 inSequence(lifecycleSequence);
-                oneOf(eventHandler).onEvent(ringBuffer.getPreallocated(2L), 2L, true);
+                oneOf(eventHandler).onEvent(ringBuffer.get(2L), 2L, true);
                 inSequence(lifecycleSequence);
 
                 will(countDown(latch));
             }
         });
 
-        Sequencer sequencer = ringBuffer.getSequencer();
-        sequencer.publish(sequencer.next());
-        sequencer.publish(sequencer.next());
-        sequencer.publish(sequencer.next());
+        ringBuffer.publish(ringBuffer.next());
+        ringBuffer.publish(ringBuffer.next());
+        ringBuffer.publish(ringBuffer.next());
 
         Thread thread = new Thread(batchEventProcessor);
         thread.start();
@@ -123,7 +121,7 @@ public final class BatchEventProcessorTest
         context.checking(new Expectations()
         {
             {
-                oneOf(eventHandler).onEvent(ringBuffer.getPreallocated(0), 0L, true);
+                oneOf(eventHandler).onEvent(ringBuffer.get(0), 0L, true);
                 inSequence(lifecycleSequence);
                 will(new Action()
                 {
@@ -140,7 +138,7 @@ public final class BatchEventProcessorTest
                     }
                 });
 
-                oneOf(exceptionHandler).handleEventException(ex, 0L, ringBuffer.getPreallocated(0));
+                oneOf(exceptionHandler).handleEventException(ex, 0L, ringBuffer.get(0));
                 inSequence(lifecycleSequence);
                 will(countDown(latch));
             }
@@ -149,8 +147,7 @@ public final class BatchEventProcessorTest
         Thread thread = new Thread(batchEventProcessor);
         thread.start();
 
-        Sequencer sequencer = ringBuffer.getSequencer();
-        sequencer.publish(sequencer.next());
+        ringBuffer.publish(ringBuffer.next());
 
         latch.await();
 

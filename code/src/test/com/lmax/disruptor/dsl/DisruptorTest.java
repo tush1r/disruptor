@@ -190,7 +190,7 @@ public class DisruptorTest
         final DelayedEventHandler delayedEventHandler = createDelayedEventHandler();
         disruptor.handleEventsWith(delayedEventHandler);
 
-        final PreallocatedRingBuffer<TestEvent> ringBuffer = disruptor.start();
+        final RingBuffer<TestEvent> ringBuffer = disruptor.start();
         delayedEventHandler.awaitStart();
 
         final StubPublisher stubPublisher = new StubPublisher(ringBuffer);
@@ -359,8 +359,9 @@ public class DisruptorTest
 
     private void createDisruptor(final Executor executor)
     {
-        disruptor = new Disruptor<TestEvent>(TestEvent.EVENT_FACTORY, 4, executor,
-                                             ProducerType.SINGLE, new BlockingWaitStrategy());
+        disruptor = new Disruptor<TestEvent>(TestEvent.EVENT_FACTORY, executor,
+                                             new SingleThreadedClaimStrategy(4),
+                                             new BlockingWaitStrategy());
     }
 
     private TestEvent publishEvent() throws InterruptedException, BrokenBarrierException
@@ -413,7 +414,6 @@ public class DisruptorTest
     private void assertThatCountDownLatchIsZero(final CountDownLatch countDownLatch)
         throws InterruptedException
     {
-        boolean released = countDownLatch.await(TIMEOUT_IN_SECONDS, SECONDS);
-        assertTrue("Batch handler did not receive entries: " + countDownLatch.getCount(), released);
+        assertTrue("Batch handler did not receive entries.", countDownLatch.await(TIMEOUT_IN_SECONDS, SECONDS));
     }
 }

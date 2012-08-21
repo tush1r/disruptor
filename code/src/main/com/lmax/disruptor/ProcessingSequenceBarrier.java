@@ -15,6 +15,7 @@
  */
 package com.lmax.disruptor;
 
+import java.util.concurrent.TimeUnit;
 
 /**
  * {@link SequenceBarrier} handed out for gating {@link EventProcessor}s on a cursor sequence and optional dependent {@link EventProcessor}(s)
@@ -22,9 +23,9 @@ package com.lmax.disruptor;
 final class ProcessingSequenceBarrier implements SequenceBarrier
 {
     private final WaitStrategy waitStrategy;
-    private final Sequence dependentSequence;
+    private final Sequence cursorSequence;
+    private final Sequence[] dependentSequences;
     private volatile boolean alerted = false;
-    private Sequence cursorSequence;
 
     public ProcessingSequenceBarrier(final WaitStrategy waitStrategy,
                                      final Sequence cursorSequence,
@@ -32,14 +33,7 @@ final class ProcessingSequenceBarrier implements SequenceBarrier
     {
         this.waitStrategy = waitStrategy;
         this.cursorSequence = cursorSequence;
-        if (0 == dependentSequences.length)
-        {
-            dependentSequence = cursorSequence;
-        }
-        else
-        {
-            dependentSequence = new FixedSequenceGroup(dependentSequences);
-        }
+        this.dependentSequences = dependentSequences;
     }
 
     @Override
@@ -48,13 +42,22 @@ final class ProcessingSequenceBarrier implements SequenceBarrier
     {
         checkAlert();
 
-        return waitStrategy.waitFor(sequence, cursorSequence, dependentSequence, this);
+        return waitStrategy.waitFor(sequence, cursorSequence, dependentSequences, this);
+    }
+
+    @Override
+    public long waitFor(final long sequence, final long timeout, final TimeUnit units)
+        throws AlertException, InterruptedException
+    {
+        checkAlert();
+
+        return waitStrategy.waitFor(sequence, cursorSequence, dependentSequences, this, timeout, units);
     }
 
     @Override
     public long getCursor()
     {
-        return dependentSequence.get();
+        return cursorSequence.get();
     }
 
     @Override

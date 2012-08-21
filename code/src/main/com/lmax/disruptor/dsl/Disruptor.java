@@ -38,10 +38,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class Disruptor<T>
 {
-    private final PreallocatedRingBuffer<T> ringBuffer;
+    private final RingBuffer<T> ringBuffer;
     private final Executor executor;
     private final EventProcessorRepository<T> eventProcessorRepository = new EventProcessorRepository<T>();
     private final AtomicBoolean started = new AtomicBoolean(false);
+    private final EventPublisher<T> eventPublisher;
     private ExceptionHandler exceptionHandler;
 
     /**
@@ -53,7 +54,7 @@ public class Disruptor<T>
      */
     public Disruptor(final EventFactory<T> eventFactory, final int ringBufferSize, final Executor executor)
     {
-        this(new PreallocatedRingBuffer<T>(eventFactory, ringBufferSize), executor);
+        this(new RingBuffer<T>(eventFactory, ringBufferSize), executor);
     }
 
     /**
@@ -64,20 +65,18 @@ public class Disruptor<T>
      * @param claimStrategy  the claim strategy to use for the ring buffer.
      * @param waitStrategy   the wait strategy to use for the ring buffer.
      */
-    public Disruptor(final EventFactory<T> eventFactory,
-                     final int ringBufferSize,
-                     final Executor executor,
-                     final ProducerType claimStrategy,
+    public Disruptor(final EventFactory<T> eventFactory, final Executor executor,
+                     final ClaimStrategy claimStrategy,
                      final WaitStrategy waitStrategy)
     {
-        this(new PreallocatedRingBuffer<T>(eventFactory, claimStrategy.createSequencer(ringBufferSize, waitStrategy)), 
-             executor);
+        this(new RingBuffer<T>(eventFactory, claimStrategy, waitStrategy), executor);
     }
 
-    private Disruptor(final PreallocatedRingBuffer<T> ringBuffer, final Executor executor)
+    private Disruptor(final RingBuffer<T> ringBuffer, final Executor executor)
     {
         this.ringBuffer = ringBuffer;
         this.executor = executor;
+        eventPublisher = new EventPublisher<T>(ringBuffer);
     }
 
     /**
@@ -184,7 +183,7 @@ public class Disruptor<T>
      */
     public void publishEvent(final EventTranslator<T> eventTranslator)
     {
-        ringBuffer.publishEvent(eventTranslator);
+        eventPublisher.publishEvent(eventTranslator);
     }
 
     /**
@@ -195,7 +194,7 @@ public class Disruptor<T>
      *
      * @return the configured ring buffer.
      */
-    public PreallocatedRingBuffer<T> start()
+    public RingBuffer<T> start()
     {
         EventProcessor[] gatingProcessors = eventProcessorRepository.getLastEventProcessorsInChain();
         ringBuffer.setGatingSequences(Util.getSequencesFor(gatingProcessors));

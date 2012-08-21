@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(JMock.class)
-@SuppressWarnings("unchecked")
 public final class AggregateEventHandlerTest
 {
     private Mockery context = new Mockery()

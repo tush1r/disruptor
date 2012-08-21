@@ -15,6 +15,9 @@
  */
 package com.lmax.disruptor;
 
+import java.util.concurrent.TimeUnit;
+
+import static com.lmax.disruptor.util.Util.getMinimumSequence;
 
 /**
  * Yielding strategy that uses a Thread.yield() for {@link com.lmax.disruptor.EventProcessor}s waiting on a barrier
@@ -27,17 +30,67 @@ public final class YieldingWaitStrategy implements WaitStrategy
     private static final int SPIN_TRIES = 100;
 
     @Override
-    public long waitFor(final long sequence, Sequence cursor, final Sequence dependentSequence, final SequenceBarrier barrier)
+    public long waitFor(final long sequence, final Sequence cursor, final Sequence[] dependents, final SequenceBarrier barrier)
         throws AlertException, InterruptedException
     {
         long availableSequence;
         int counter = SPIN_TRIES;
 
-        while ((availableSequence = dependentSequence.get()) < sequence)
+        if (0 == dependents.length)
         {
-            counter = applyWaitMethod(barrier, counter);
+            while ((availableSequence = cursor.get()) < sequence)
+            {
+                counter = applyWaitMethod(barrier, counter);
+            }
         }
-        
+        else
+        {
+            while ((availableSequence = getMinimumSequence(dependents)) < sequence)
+            {
+                counter = applyWaitMethod(barrier, counter);
+            }
+        }
+
+        return availableSequence;
+    }
+
+    @Override
+    public long waitFor(final long sequence, final Sequence cursor, final Sequence[] dependents, final SequenceBarrier barrier,
+                        final long timeout, final TimeUnit sourceUnit)
+        throws AlertException, InterruptedException
+    {
+        final long timeoutMs = sourceUnit.toMillis(timeout);
+        final long startTime = System.currentTimeMillis();
+        long availableSequence;
+        int counter = SPIN_TRIES;
+
+        if (0 == dependents.length)
+        {
+            while ((availableSequence = cursor.get()) < sequence)
+            {
+                counter = applyWaitMethod(barrier, counter);
+
+                final long elapsedTime = System.currentTimeMillis() - startTime;
+                if (elapsedTime > timeoutMs)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            while ((availableSequence = getMinimumSequence(dependents)) < sequence)
+            {
+                counter = applyWaitMethod(barrier, counter);
+
+                final long elapsedTime = System.currentTimeMillis() - startTime;
+                if (elapsedTime > timeoutMs)
+                {
+                    break;
+                }
+            }
+        }
+
         return availableSequence;
     }
 

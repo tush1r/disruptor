@@ -29,11 +29,12 @@ public class EventPublisherTest implements EventTranslator<LongEvent>
     @Test
     public void shouldPublishEvent()
     {
-        PreallocatedRingBuffer<LongEvent> ringBuffer = new PreallocatedRingBuffer<LongEvent>(LongEvent.FACTORY, BUFFER_SIZE);
-        ringBuffer.setGatingSequences(new NoOpEventProcessor(ringBuffer.getSequencer()).getSequence());
+        RingBuffer<LongEvent> ringBuffer = new RingBuffer<LongEvent>(LongEvent.FACTORY, BUFFER_SIZE);
+        ringBuffer.setGatingSequences(new NoOpEventProcessor(ringBuffer).getSequence());
+        EventPublisher<LongEvent> eventPublisher = new EventPublisher<LongEvent>(ringBuffer);
 
-        ringBuffer.publishEvent(this);
-        ringBuffer.publishEvent(this);
+        eventPublisher.publishEvent(this);
+        eventPublisher.publishEvent(this);
         
         assertThat(Long.valueOf(ringBuffer.get(0).get()), is(Long.valueOf(0 + 29L)));
         assertThat(Long.valueOf(ringBuffer.get(1).get()), is(Long.valueOf(1 + 29L)));
@@ -42,12 +43,13 @@ public class EventPublisherTest implements EventTranslator<LongEvent>
     @Test
     public void shouldTryPublishEvent() throws Exception
     {
-        PreallocatedRingBuffer<LongEvent> ringBuffer = new PreallocatedRingBuffer<LongEvent>(LongEvent.FACTORY, BUFFER_SIZE);
+        RingBuffer<LongEvent> ringBuffer = new RingBuffer<LongEvent>(LongEvent.FACTORY, BUFFER_SIZE);
         ringBuffer.setGatingSequences(new Sequence());
+        EventPublisher<LongEvent> eventPublisher = new EventPublisher<LongEvent>(ringBuffer);
 
         for (int i = 0; i < BUFFER_SIZE; i++)
         {
-            assertThat(ringBuffer.tryPublishEvent(this, 1), is(true));
+            assertThat(eventPublisher.tryPublishEvent(this, 1), is(true));
         }
 
         for (int i = 0; i < BUFFER_SIZE; i++)
@@ -55,7 +57,7 @@ public class EventPublisherTest implements EventTranslator<LongEvent>
             assertThat(Long.valueOf(ringBuffer.get(i).get()), is(Long.valueOf(i + 29L)));
         }
 
-        assertThat(ringBuffer.tryPublishEvent(this, 1), is(false));
+        assertThat(eventPublisher.tryPublishEvent(this, 1), is(false));
     }
     
     @Override
