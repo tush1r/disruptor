@@ -3,6 +3,11 @@
 
 ==Changes==
 
+==2.10.2 Released (21-Aug-2012 - rev 588) ==
+ * Bug fix, potential race condition in !BlockingWaitStrategy.
+ * Bug fix set initial !SequenceGroup value to -1 (Issue #27).
+ * Deprecate timeout methods that will be removed in version 3.
+
 ==2.10.1 (6-June-2012 - rev 560) ==
  * Bug fix, correct OSGI metadata.
  * Remove unnecessary code in wait strategies.
