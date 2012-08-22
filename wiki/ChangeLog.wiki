@@ -3,7 +3,7 @@
 
 ==Changes==
 
-==2.10.3 Released (21-Aug-2012 - rev 588) ==
+==2.10.3 Released (22-Aug-2012 - rev 593) ==
  * Bug fix, race condition in !SequenceGroup when removing Sequences and getting current value
 
 ==2.10.2 Released (21-Aug-2012 - rev 588) ==
