@@ -3,6 +3,9 @@
 
 ==Changes==
 
+==2.10.3 Released (21-Aug-2012 - rev 588) ==
+ * Bug fix, race condition in !SequenceGroup when removing Sequences and getting current value
+
 ==2.10.2 Released (21-Aug-2012 - rev 588) ==
  * Bug fix, potential race condition in !BlockingWaitStrategy.
  * Bug fix set initial !SequenceGroup value to -1 (Issue #27).
